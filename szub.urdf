@@ -1,0 +1,115 @@
+<robot name="sausage_hanger">
+	<!-- Szubienica -->
+	<link name="szubienica">
+		<visual>
+			<geometry>
+				<mesh filename="nowe.gltf" scale="1 1 1"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</visual>
+	</link>
+
+	<!-- Kielbasa 1 -->
+	<link name="kielbasa_01">
+		<inertial>
+			<mass value="1.5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="nowe.gltf" scale="1 1 1"/>
+			</geometry>
+			<origin xyz="0 0 -0.5" rpy="0 1.57 0"/>
+			<!-- Wizualizacja pierwszej kiełbasy -->
+		</visual>
+	</link>
+
+	<!-- Przegub 1 -->
+	<joint name="joint_01" type="revolute">
+		<parent link="szubienica"/>
+		<child link="kielbasa_01"/>
+		<origin xyz="0 0 -0.5" rpy="0 0 0"/>
+		<!-- Połączenie z szubienicą -->
+		<axis xyz="1 0 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+	</joint>
+
+	<!-- Kielbasa 2 -->
+	<link name="kielbasa_02">
+		<inertial>
+			<mass value="1.5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="nowe.gltf" scale="1 1 1"/>
+			</geometry>
+			<origin xyz="0 0 -1.0" rpy="0 1.57 0"/>
+			<!-- Wizualizacja drugiej kiełbasy -->
+		</visual>
+	</link>
+
+	<!-- Przegub 2 -->
+	<joint name="joint_02" type="revolute">
+		<parent link="kielbasa_01"/>
+		<child link="kielbasa_02"/>
+		<origin xyz="0 0 -1.0" rpy="0 0 0"/>
+		<!-- Połączenie z pierwszą kiełbasą -->
+		<axis xyz="0 1 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+	</joint>
+
+	<!-- Kielbasa 3 -->
+	<link name="kielbasa_03">
+		<inertial>
+			<mass value="1.5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="nowe.gltf" scale="1 1 1"/>
+			</geometry>
+			<origin xyz="0 0 -1.5" rpy="0 1.57 0"/>
+			<!-- Wizualizacja trzeciej kiełbasy -->
+		</visual>
+	</link>
+
+	<!-- Przegub 3 -->
+	<joint name="joint_03" type="revolute">
+		<parent link="kielbasa_02"/>
+		<child link="kielbasa_03"/>
+		<origin xyz="0 0 -1.5" rpy="0 0 0"/>
+		<!-- Połączenie z drugą kiełbasą -->
+		<axis xyz="1 0 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+	</joint>
+
+	<!-- Kielbasa 4 -->
+	<link name="kielbasa_04">
+		<inertial>
+			<mass value="1.5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<mesh filename="nowe.gltf" scale="1 1 1"/>
+			</geometry>
+			<origin xyz="0 0 -2.0" rpy="0 1.57 0"/>
+			<!-- Wizualizacja czwartej kiełbasy -->
+		</visual>
+	</link>
+
+	<!-- Przegub 4 -->
+	<joint name="joint_04" type="revolute">
+		<parent link="kielbasa_03"/>
+		<child link="kielbasa_04"/>
+		<origin xyz="0 0 -2.0" rpy="0 0 0"/>
+		<!-- Połączenie z trzecią kiełbasą -->
+		<axis xyz="0 1 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+	</joint>
+</robot>
