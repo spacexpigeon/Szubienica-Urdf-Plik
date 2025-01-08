@@ -1,115 +1,138 @@
-<robot name="sausage_hanger">
+<?xml version="1.0"?>
+<robot name="kielbasa_robot">
 	<!-- Szubienica -->
-	<link name="szubienica">
+	<link name="base_link">
 		<visual>
 			<geometry>
-				<mesh filename="nowe.gltf" scale="1 1 1"/>
+				<mesh filename="szubienica.gltf"/>
 			</geometry>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
 		</visual>
 	</link>
 
-	<!-- Kielbasa 1 -->
-	<link name="kielbasa_01">
-		<inertial>
-			<mass value="1.5"/>
-			<origin xyz="0 0 0"/>
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
-		</inertial>
-		<visual>
-			<geometry>
-				<mesh filename="nowe.gltf" scale="1 1 1"/>
-			</geometry>
-			<origin xyz="0 0 -0.5" rpy="0 1.57 0"/>
-			<!-- Wizualizacja pierwszej kiełbasy -->
-		</visual>
-	</link>
-
-	<!-- Przegub 1 -->
+	<!-- Kiełbasa 01 -->
 	<joint name="joint_01" type="revolute">
-		<parent link="szubienica"/>
-		<child link="kielbasa_01"/>
-		<origin xyz="0 0 -0.5" rpy="0 0 0"/>
-		<!-- Połączenie z szubienicą -->
-		<axis xyz="1 0 0"/>
-		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+		<parent link="base_link"/>
+		<child link="kielbasa_01_link"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
 	</joint>
-
-	<!-- Kielbasa 2 -->
-	<link name="kielbasa_02">
-		<inertial>
-			<mass value="1.5"/>
-			<origin xyz="0 0 0"/>
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
-		</inertial>
+	<link name="kielbasa_01_link">
 		<visual>
 			<geometry>
-				<mesh filename="nowe.gltf" scale="1 1 1"/>
+				<mesh filename="kielbasa_01.gltf"/>
 			</geometry>
-			<origin xyz="0 0 -1.0" rpy="0 1.57 0"/>
-			<!-- Wizualizacja drugiej kiełbasy -->
 		</visual>
 	</link>
 
-	<!-- Przegub 2 -->
+	<!-- Walec 01 -->
+	<joint name="joint_walec_01" type="fixed">
+		<parent link="kielbasa_01_link"/>
+		<child link="walec_01_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Przesunięcie walca między kiełbasy -->
+	</joint>
+	<link name="walec_01_link">
+		<visual>
+			<geometry>
+				<mesh filename="walec_03.gltf"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- Kiełbasa 02 -->
 	<joint name="joint_02" type="revolute">
-		<parent link="kielbasa_01"/>
-		<child link="kielbasa_02"/>
-		<origin xyz="0 0 -1.0" rpy="0 0 0"/>
-		<!-- Połączenie z pierwszą kiełbasą -->
+		<parent link="walec_01_link"/>
+		<child link="kielbasa_02_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Kiełbasa przesunięta za walec -->
 		<axis xyz="0 1 0"/>
-		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+		<limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
 	</joint>
-
-	<!-- Kielbasa 3 -->
-	<link name="kielbasa_03">
-		<inertial>
-			<mass value="1.5"/>
-			<origin xyz="0 0 0"/>
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
-		</inertial>
+	<link name="kielbasa_02_link">
 		<visual>
 			<geometry>
-				<mesh filename="nowe.gltf" scale="1 1 1"/>
+				<mesh filename="kielbasa_02.gltf"/>
 			</geometry>
-			<origin xyz="0 0 -1.5" rpy="0 1.57 0"/>
-			<!-- Wizualizacja trzeciej kiełbasy -->
 		</visual>
 	</link>
 
-	<!-- Przegub 3 -->
+	<!-- Walec 02 -->
+	<joint name="joint_walec_02" type="fixed">
+		<parent link="kielbasa_02_link"/>
+		<child link="walec_02_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Przesunięcie walca między kiełbasy -->
+	</joint>
+	<link name="walec_02_link">
+		<visual>
+			<geometry>
+				<mesh filename="walec_02.gltf"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- Kiełbasa 03 -->
 	<joint name="joint_03" type="revolute">
-		<parent link="kielbasa_02"/>
-		<child link="kielbasa_03"/>
-		<origin xyz="0 0 -1.5" rpy="0 0 0"/>
-		<!-- Połączenie z drugą kiełbasą -->
-		<axis xyz="1 0 0"/>
-		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+		<parent link="walec_02_link"/>
+		<child link="kielbasa_03_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Kiełbasa przesunięta za walec -->
+		<axis xyz="0 1 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
 	</joint>
-
-	<!-- Kielbasa 4 -->
-	<link name="kielbasa_04">
-		<inertial>
-			<mass value="1.5"/>
-			<origin xyz="0 0 0"/>
-			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/>
-		</inertial>
+	<link name="kielbasa_03_link">
 		<visual>
 			<geometry>
-				<mesh filename="nowe.gltf" scale="1 1 1"/>
+				<mesh filename="kielbasa_03.gltf"/>
 			</geometry>
-			<origin xyz="0 0 -2.0" rpy="0 1.57 0"/>
-			<!-- Wizualizacja czwartej kiełbasy -->
 		</visual>
 	</link>
 
-	<!-- Przegub 4 -->
-	<joint name="joint_04" type="revolute">
-		<parent link="kielbasa_03"/>
-		<child link="kielbasa_04"/>
-		<origin xyz="0 0 -2.0" rpy="0 0 0"/>
-		<!-- Połączenie z trzecią kiełbasą -->
-		<axis xyz="0 1 0"/>
-		<limit lower="-1.57" upper="1.57" effort="10" velocity="1"/>
+	<!-- Walec 03 -->
+	<joint name="joint_walec_03" type="fixed">
+		<parent link="kielbasa_03_link"/>
+		<child link="walec_03_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Przesunięcie walca między kiełbasy -->
 	</joint>
+	<link name="walec_03_link">
+		<visual>
+			<geometry>
+				<mesh filename="walec_01.gltf"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- Kiełbasa 04 -->
+	<joint name="joint_04" type="revolute">
+		<parent link="walec_03_link"/>
+		<child link="kielbasa_04_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Kiełbasa przesunięta za walec -->
+		<axis xyz="0 1 0"/>
+		<limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
+	</joint>
+	<link name="kielbasa_04_link">
+		<visual>
+			<geometry>
+				<mesh filename="kielbasa_04.gltf"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- Walec 04 -->
+	<joint name="joint_walec_04" type="fixed">
+		<parent link="kielbasa_04_link"/>
+		<child link="walec_04_link"/>
+		<origin xyz="0 0.15 0" rpy="0 0 0"/>
+		<!-- Ostatni walec -->
+	</joint>
+	<link name="walec_04_link">
+		<visual>
+			<geometry>
+				<mesh filename="walec.gltf"/>
+			</geometry>
+		</visual>
+	</link>
 </robot>
